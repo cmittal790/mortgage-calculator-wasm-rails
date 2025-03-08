@@ -1,0 +1,15 @@
+{
+  "name": "mortgage",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "mortgage_bg.wasm",
+    "mortgage.js",
+    "mortgage.d.ts"
+  ],
+  "main": "mortgage.js",
+  "types": "mortgage.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
