@@ -1,3 +1,5 @@
+// /app/javascript/wasm/mortgage.js
+
 let wasm;
 
 /**

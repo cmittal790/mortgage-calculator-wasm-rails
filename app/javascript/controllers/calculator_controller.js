@@ -1,4 +1,7 @@
+// app/javascript/controllers/calculator_controller.js
+
 import { Controller } from "@hotwired/stimulus";
+import init, * as wasmModule from "mortgage"; // Load from import-mapped pin
 
 export default class extends Controller {
   static targets = ["loanAmount", "interestRate", "years", "result"];
@@ -7,18 +10,13 @@ export default class extends Controller {
     console.log("CalculatorController connected!");
 
     try {
-      // Dynamically load the WASM module
-      const wasmModule = await import("/assets/wasm/mortgage.js");
+      // Initialize the WASM module
+      await init();
 
-      // Initialize the wasm-bindgen glue code (this is where `wbg` is defined)
-      await wasmModule.default();
-
-      // The WASM module is now initialized. We can proceed to call the exported functions.
+      // Assign the WASM module
       this.wasm = wasmModule;
 
-      // Log the contents of the WASM module
       console.log("WASM Module:", this.wasm);
-
       console.log("WASM Module loaded and instantiated!");
     } catch (error) {
       console.error("Failed to load WASM module:", error);
