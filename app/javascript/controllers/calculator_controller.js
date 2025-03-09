@@ -10,13 +10,12 @@ export default class extends Controller {
     console.log("CalculatorController connected!");
 
     try {
-      // Initialize the WASM module
+      // Initialize the WASM module with the Rails asset path
       await init();
 
       // Assign the WASM module
       this.wasm = wasmModule;
 
-      console.log("WASM Module:", this.wasm);
       console.log("WASM Module loaded and instantiated!");
     } catch (error) {
       console.error("Failed to load WASM module:", error);

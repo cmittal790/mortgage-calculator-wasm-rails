@@ -112,7 +112,9 @@ async function __wbg_init(module_or_path) {
     }
 
     if (typeof module_or_path === 'undefined') {
-        module_or_path = new URL('mortgage_bg.wasm', import.meta.url);
+        // Use the Rails asset path if available, otherwise use relative URL
+        module_or_path = window.RAILS_ASSET_URL ||
+        new URL('mortgage_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 
