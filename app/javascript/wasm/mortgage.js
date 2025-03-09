@@ -44,6 +44,33 @@ async function __wbg_load(module, imports) {
     }
 }
 
+/*
+async function __wbg_load(module, imports) {
+    if (typeof Response === 'function' && module instanceof Response) {
+        // Only try streaming in production
+        if (window.ENV === 'production') {
+            try {
+                return await WebAssembly.instantiateStreaming(module, imports);
+            } catch (e) {
+                console.warn("Falling back to non-streaming WASM instantiation:", e);
+            }
+        }
+
+        // Always fall back to this method in development or if streaming fails
+        const bytes = await module.arrayBuffer();
+        return await WebAssembly.instantiate(bytes, imports);
+    } else {
+        const instance = await WebAssembly.instantiate(module, imports);
+
+        if (instance instanceof WebAssembly.Instance) {
+            return { instance, module };
+        } else {
+            return instance;
+        }
+    }
+}
+*/
+
 function __wbg_get_imports() {
     const imports = {};
     imports.wbg = {};
